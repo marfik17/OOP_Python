@@ -1,9 +1,9 @@
 import random
 cnt=0
-hui=random.randint(1,67)
-for i in range(hui):
-    for i in range(hui):
-        print('сик севен')
+koch=random.randint(1,100)
+for i in range(koch):
+    for i in range(koch):
+        print('chupep')
         cnt+=1
-print(cnt,'коллво сикс севен')        
-print('рандомный сикс севен напечатан')
+print(cnt,'скока')        
+print('рандом чюпеп')
