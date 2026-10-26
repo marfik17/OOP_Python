@@ -1,0 +1,40 @@
+@startuml
+abstract class Transport {
+  +exchange(host, port, payload, timeout, tls)
+}
+class SocketTransport {
+  +exchange(host, port, payload, timeout, tls)
+  -_read_response(sock)
+}
+class HttpClient {
+  -transport: Transport
+  -timeout: float
+  +request(url, method, headers, body)
+}
+abstract class RequestHandler {
+  +handle(method, path, headers, body)
+}
+class BasicRouter {
+  +handle(method, path, headers, body)
+}
+class HttpServer {
+  -port: int
+  -log_queue: Queue
+  +start()
+  +stop()
+  -_serve()
+  -_client(conn, addr)
+}
+class App {
+  +send_request()
+  +start_server()
+  +stop_server()
+  -_poll_queue()
+}
+Transport <|-- SocketTransport
+RequestHandler <|-- BasicRouter
+HttpClient --> Transport
+HttpServer --> RequestHandler
+App --> HttpClient
+App --> HttpServer
+@enduml

@@ -1,0 +1,14 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad="0.25", nodesep="0.35", ranksep="0.55", fontname="Arial", label="Диаграмма классов HTTP-клиента и сервера", labelloc=t, fontsize=18];
+  node [shape=box, style="rounded,filled", fillcolor="#eef4fb", color="#45617d", fontname="Arial", fontsize=10, margin="0.12,0.08"];
+  edge [color="#45617d", fontname="Arial", fontsize=9, arrowsize=0.7];
+  App; URLParser; HTTPMessage; HttpClient; Transport [label="Transport\n(абстрактный)", fillcolor="#f9f1dc"]; SocketTransport; RequestHandler [label="RequestHandler\n(абстрактный)", fillcolor="#f9f1dc"]; BasicRouter; HttpServer;
+  App -> HttpClient [label="использует"];
+  App -> HttpServer [label="управляет"];
+  HttpClient -> URLParser [label="разбирает URL"];
+  HttpClient -> HTTPMessage [label="формирует / разбирает"];
+  HttpClient -> Transport [label="обмен"];
+  SocketTransport -> Transport [arrowhead=empty, label="реализация"];
+  HttpServer -> RequestHandler [label="делегирует обработку"];
+  BasicRouter -> RequestHandler [arrowhead=empty, label="реализация"];
+}
